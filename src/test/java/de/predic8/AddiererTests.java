@@ -11,5 +11,4 @@ public class AddiererTests {
     public void testAddiere() throws Exception {
         assertEquals(3, addierer.addiere(1,2));
     }
-
 }
