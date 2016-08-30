@@ -39,15 +39,19 @@ stage 'Acceptance'
 
 node {
     echo 'Performing automated acceptance tests'
+    sleep time: 5, unit: 'SECONDS'
 }
 
 stage 'UAT'
 
 node {
     echo "Deploying to UAT"
+    sleep time: 5, unit: 'SECONDS'
 }
 
-input 'Deploy to production?'
+timeout(time: 5, unit: 'DAYS') {
+    input 'Deploy to production?'
+}
 
 stage name: 'Production', concurrency: 1
 
