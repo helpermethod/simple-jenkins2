@@ -22,7 +22,7 @@ node {
         error 'There are test failures'
     }
 
-    stash includes: 'target/*.jar', name: 'jar'
+    stash 'jar'
 }
 
 stage 'Deploy'
