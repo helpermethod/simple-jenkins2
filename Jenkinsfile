@@ -16,7 +16,7 @@ node {
         sh 'mvn package'
     }
 
-    stash 'target/*.jar', name: 'jar'
+    stash includes: 'target/*.jar', name: 'jar'
 }
 
 stage 'Deploy'
