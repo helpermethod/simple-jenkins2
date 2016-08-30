@@ -25,6 +25,26 @@ node {
     unstash 'jar'
 
     withEnv(["PATH+MAVEN=${tool 'mvn3'}/bin"]) {
-        sh 'mvn jar:jar deploy:deploy'
+        echo 'mvn jar:jar deploy:deploy'
     }
+}
+
+stage 'Acceptance'
+
+node {
+    echo 'Performing automated acceptance tests'
+}
+
+stage 'UAT'
+
+node {
+    echo "Deploying to UAT"
+}
+
+input 'Deploy to production?'
+
+stage name: 'Production', concurrency: 1
+
+node {
+    echo "Deploying to production"
 }
