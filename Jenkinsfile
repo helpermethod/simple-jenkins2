@@ -13,7 +13,13 @@ node {
 
     withEnv(["PATH+MAVEN=${tool 'mvn3'}/bin"]) {
         // build packages once
-        sh 'mvn package'
+        sh 'mvn package -Dmaven.test.failure.ignore'
+    }
+
+    step $class: 'JUnitResultArchiver', testResults: '**/target/*-reports/TEST-*.xml'
+
+    if (currentBuild.result == 'UNSTABLE') {
+        error 'There are test failures'
     }
 
     stash includes: 'target/*.jar', name: 'jar'
