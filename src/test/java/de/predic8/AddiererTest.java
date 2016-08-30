@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class AddiererTests {
+public class AddiererTest {
     Addierer addierer = new Addierer();
 
     @Test
