@@ -9,6 +9,6 @@ public class AddiererTest {
 
     @Test
     public void testAddiere() throws Exception {
-        assertEquals(3, addierer.addiere(1,2));
+        assertEquals(4, addierer.addiere(1,2));
     }
 }
