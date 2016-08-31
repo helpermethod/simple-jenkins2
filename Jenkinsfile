@@ -3,7 +3,7 @@
 stage 'Checkout'
 
 node {
-    git 'https://github.com/helpermethod/simple-jenkins2'
+    checkout scm
 
     stash 'src'
 }
@@ -38,6 +38,7 @@ node {
 }
 
 stage name: 'Acceptance + Performance'
+
 
 node {
     parallel(
