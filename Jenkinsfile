@@ -51,20 +51,20 @@ node {
         }
     )
 }
-//
-//stage name: 'UAT'
-//
-//node {
-//    echo 'Deploying to UAT'
-//    sleep time: 5, unit: 'SECONDS'
-//}
-//
-//timeout(time: 5, unit: 'DAYS') {
-//    input 'Deploy to production?'
-//}
-//
-//stage 'Production'
-//
-//node {
-//    echo 'Deploying to production'
-//}
+
+stage name: 'UAT'
+
+node {
+    echo 'Deploying to UAT'
+    sleep time: 5, unit: 'SECONDS'
+}
+
+timeout(time: 5, unit: 'DAYS') {
+    input 'Deploy to production?'
+}
+
+stage 'Production'
+
+node {
+    echo 'Deploying to production'
+}
