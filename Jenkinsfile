@@ -26,45 +26,45 @@ node {
 
     stash 'jar'
 }
-
-stage 'Deploy'
-
-node {
-    unstash 'jar'
-
-    withEnv(["PATH+MAVEN=${tool 'mvn3'}/bin"]) {
-        echo 'mvn jar:jar deploy:deploy'
-    }
-}
-
-stage name: 'Acceptance + Performance'
-
-node {
-    parallel(
-        'acceptance': {
-            echo 'Performing automated acceptance tests'
-            sleep time: 5, unit: 'SECONDS'
-        },
-        'performance': {
-            echo 'Performing automated performance tests'
-            sleep time: 10, unit: 'SECONDS'
-        }
-    )
-}
-
-stage name: 'UAT'
-
-node {
-    echo 'Deploying to UAT'
-    sleep time: 5, unit: 'SECONDS'
-}
-
-timeout(time: 5, unit: 'DAYS') {
-    input 'Deploy to production?'
-}
-
-stage 'Production'
-
-node {
-    echo 'Deploying to production'
-}
+//
+//stage 'Deploy'
+//
+//node {
+//    unstash 'jar'
+//
+//    withEnv(["PATH+MAVEN=${tool 'mvn3'}/bin"]) {
+//        echo 'mvn jar:jar deploy:deploy'
+//    }
+//}
+//
+//stage 'Acceptance + Performance'
+//
+//node {
+//    parallel(
+//        'acceptance': {
+//            echo 'Performing automated acceptance tests'
+//            sleep time: 5, unit: 'SECONDS'
+//        },
+//        'performance': {
+//            echo 'Performing automated performance tests'
+//            sleep time: 10, unit: 'SECONDS'
+//        }
+//    )
+//}
+//
+//stage name: 'UAT'
+//
+//node {
+//    echo 'Deploying to UAT'
+//    sleep time: 5, unit: 'SECONDS'
+//}
+//
+//timeout(time: 5, unit: 'DAYS') {
+//    input 'Deploy to production?'
+//}
+//
+//stage 'Production'
+//
+//node {
+//    echo 'Deploying to production'
+//}
