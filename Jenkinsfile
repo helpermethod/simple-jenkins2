@@ -39,15 +39,14 @@ node {
 
 stage name: 'Acceptance + Performance'
 
-
 node {
     parallel(
-        "acceptance": {
-            echo "Performing automated acceptance tests"
+        'acceptance': {
+            echo 'Performing automated acceptance tests'
             sleep time: 5, unit: 'SECONDS'
         },
-        "performance": {
-            echo "Performing automated performance tests"
+        'performance': {
+            echo 'Performing automated performance tests'
             sleep time: 10, unit: 'SECONDS'
         }
     )
@@ -56,7 +55,7 @@ node {
 stage name: 'UAT'
 
 node {
-    echo "Deploying to UAT"
+    echo 'Deploying to UAT'
     sleep time: 5, unit: 'SECONDS'
 }
 
@@ -67,5 +66,5 @@ timeout(time: 5, unit: 'DAYS') {
 stage 'Production'
 
 node {
-    echo "Deploying to production"
+    echo 'Deploying to production'
 }
