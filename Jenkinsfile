@@ -1,3 +1,5 @@
+#!groovy
+
 stage 'Checkout'
 
 node {
@@ -35,14 +37,22 @@ node {
     }
 }
 
-stage 'Acceptance'
+stage name: 'Acceptance + Performance'
 
 node {
-    echo 'Performing automated acceptance tests'
-    sleep time: 5, unit: 'SECONDS'
+    parallel(
+        "acceptance": {
+            echo "Performing automated acceptance tests"
+            sleep time: 5, unit: 'SECONDS'
+        },
+        "performance": {
+            echo "Performing automated performance tests"
+            sleep time: 10, unit: 'SECONDS'
+        }
+    )
 }
 
-stage 'UAT'
+stage name: 'UAT'
 
 node {
     echo "Deploying to UAT"
@@ -53,7 +63,7 @@ timeout(time: 5, unit: 'DAYS') {
     input 'Deploy to production?'
 }
 
-stage name: 'Production', concurrency: 1
+stage 'Production'
 
 node {
     echo "Deploying to production"
